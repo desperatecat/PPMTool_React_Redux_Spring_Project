@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./components/Navbar";
 import ProjectBoard from "./components/ProjectBoard";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddProjectTask from "./components/ProjectTask/AddProjectTask";
+import store from "./store";
+import { Provider } from "react-redux";
 
 class App extends Component {
   render() {

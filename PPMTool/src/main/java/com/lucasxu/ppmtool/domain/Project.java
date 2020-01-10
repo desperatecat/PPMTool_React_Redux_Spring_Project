@@ -22,7 +22,6 @@ public class Project {
 //    @Column(updatable = false, unique = true)
 //    private String projectIdentifier;
 
-    @NotBlank(message = "AcceptanceCriteria is required")
     private String acceptanceCriteria;
 
     private String status;

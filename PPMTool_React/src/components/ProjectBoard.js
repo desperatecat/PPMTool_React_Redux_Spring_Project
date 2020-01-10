@@ -5,9 +5,9 @@ class ProjectBoard extends Component {
   render() {
     return (
       <div className="container">
-        <a href="/ProjectTaskForm.html" className="btn btn-primary mb-3">
-          <i class="fas fa-plus-circle"> Create Project Task</i>
-        
+        <Link to="/addProjectTask" className="btn btn-primary mb-3">
+          <i class="fas fa-plus-circle"> Create Project Task </i>
+        </Link>
         <br />
         <hr />
         <div className="container">

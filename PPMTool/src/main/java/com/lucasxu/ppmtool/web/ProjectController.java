@@ -1,7 +1,6 @@
 package com.lucasxu.ppmtool.web;
 
 import com.lucasxu.ppmtool.domain.Project;
-import com.lucasxu.ppmtool.exceptions.ProjectIdException;
 import com.lucasxu.ppmtool.services.MapValidationErrorService;
 import com.lucasxu.ppmtool.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 @RestController
-@RequestMapping("/api/project")
+@RequestMapping("/api/board")
+@CrossOrigin
 public class ProjectController {
 
     @Autowired
@@ -39,9 +36,9 @@ public class ProjectController {
     }
 
     @GetMapping("/{projectId}")
-    public ResponseEntity<?> getProjectById(@PathVariable String projectId){
+    public ResponseEntity<?> getProjectById(@PathVariable Long projectId){
 
-        Project project = projectService.findProjectByIdentifier(projectId);
+        Project project = projectService.findProjectById(projectId);
 
         return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
@@ -53,9 +50,9 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<?> deleteProjectById(@PathVariable String projectId){
+    public ResponseEntity<?> deleteProjectById(@PathVariable Long projectId){
 
-        projectService.deleteProjectByIdentifier(projectId);
+        projectService.deleteProjectById(projectId);
 
         return new ResponseEntity<String>("Project with ID: '" + projectId + "' was deleted", HttpStatus.OK);
     }

@@ -13,7 +13,9 @@ class AddProjectTask extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   onSubmit(e) {
@@ -45,8 +47,8 @@ class AddProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="summary"
                     value={this.state.summary}
-                    placeholder="Project Task summary"
                     onChange={this.onChange}
+                    placeholder="Project Task summary"
                   />
                 </div>
                 <div className="form-group">

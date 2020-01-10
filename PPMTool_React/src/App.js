@@ -10,13 +10,15 @@ import { Provider } from "react-redux";
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Navbar />
-          <Route exact path="/" component={ProjectBoard} />
-          <Route exact path="/addProjectTask" component={AddProjectTask} />
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <Route exact path="/" component={ProjectBoard} />
+            <Route exact path="/addProjectTask" component={AddProjectTask} />
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }

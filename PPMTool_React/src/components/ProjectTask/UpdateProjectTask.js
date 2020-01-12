@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import classnames from "classnames";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { getProjectTask } from "../../actions/projectTaskActions";
 
 class UpdateProjectTask extends Component {
+  componentDidMount() {
+    const { projectId } = this.props.match.params;
+    this.props.getProjectTask(projectId);
+  }
+
   render() {
     return (
       <div className="addProjectTask">
@@ -13,15 +23,13 @@ class UpdateProjectTask extends Component {
               <h4 className="display-4 text-center">
                 Add /Update Project Task
               </h4>
-              <form onSubmit={this.onSubmit}>
+              <form>
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
                     name="summary"
-                    value={this.state.summary}
                     placeholder="Project Task summary"
-                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -29,16 +37,12 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
-                    value={this.state.acceptanceCriteria}
-                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
                   <select
                     className="form-control form-control-lg"
                     name="status"
-                    value={this.state.status}
-                    onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>
@@ -59,4 +63,15 @@ class UpdateProjectTask extends Component {
   }
 }
 
-export default UpdateProjectTask;
+UpdateProjectTask.propTypes = {
+  project_task: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  getProjectTask: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  project_task: state.project_task,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps, { getProjectTask })(UpdateProjectTask);

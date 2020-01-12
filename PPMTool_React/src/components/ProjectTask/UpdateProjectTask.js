@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { getProjectTask } from "../../actions/projectTaskActions";
+import {
+  getProjectTask,
+  addProjectTask
+} from "../../actions/projectTaskActions";
 
 class UpdateProjectTask extends Component {
   constructor() {
@@ -17,6 +20,7 @@ class UpdateProjectTask extends Component {
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,6 +44,18 @@ class UpdateProjectTask extends Component {
     this.props.getProjectTask(projectId);
   }
 
+  onSubmit(e) {
+    e.preventDefault();
+    const updatedTask = {
+      id: this.state.id,
+      summary: this.state.summary,
+      acceptanceCriteria: this.state.acceptanceCriteria,
+      status: this.state.status
+    };
+
+    this.props.addProjectTask(updatedTask, this.props.history);
+  }
+
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -58,7 +74,7 @@ class UpdateProjectTask extends Component {
               <h4 className="display-4 text-center">
                 Add /Update Project Task
               </h4>
-              <form>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -107,7 +123,8 @@ class UpdateProjectTask extends Component {
 UpdateProjectTask.propTypes = {
   project_task: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  getProjectTask: PropTypes.func.isRequired
+  getProjectTask: PropTypes.func.isRequired,
+  addProjectTask: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -115,4 +132,6 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps, { getProjectTask })(UpdateProjectTask);
+export default connect(mapStateToProps, { getProjectTask, addProjectTask })(
+  UpdateProjectTask
+);

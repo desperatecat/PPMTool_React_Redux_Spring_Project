@@ -6,9 +6,44 @@ import PropTypes from "prop-types";
 import { getProjectTask } from "../../actions/projectTaskActions";
 
 class UpdateProjectTask extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      id: "",
+      summary: "",
+      acceptanceCriteria: "",
+      status: "",
+      errors: {}
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      id,
+      summary,
+      acceptanceCriteria,
+      status
+    } = nextProps.project_task.project_task;
+
+    this.setState({
+      id,
+      summary,
+      acceptanceCriteria,
+      status
+    });
+  }
+
   componentDidMount() {
     const { projectId } = this.props.match.params;
     this.props.getProjectTask(projectId);
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   render() {
@@ -30,6 +65,8 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="summary"
                     placeholder="Project Task summary"
+                    value={this.state.summary}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
@@ -37,12 +74,16 @@ class UpdateProjectTask extends Component {
                     className="form-control form-control-lg"
                     placeholder="Acceptance Criteria"
                     name="acceptanceCriteria"
+                    value={this.state.acceptanceCriteria}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
                   <select
                     className="form-control form-control-lg"
                     name="status"
+                    value={this.state.status}
+                    onChange={this.onChange}
                   >
                     <option value="">Select Status</option>
                     <option value="TO_DO">TO DO</option>

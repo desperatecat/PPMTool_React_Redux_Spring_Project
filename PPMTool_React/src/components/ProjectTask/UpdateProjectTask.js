@@ -91,8 +91,8 @@ class UpdateProjectTask extends Component {
                     })}
                     name="summary"
                     placeholder="Project Task summary"
-                    value={this.state.summary}
                     onChange={this.onChange}
+                    value={this.state.summary}
                   />
                   {errors.summary && (
                     <div className="invalid-feedback">{errors.summary}</div>

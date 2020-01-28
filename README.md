@@ -1,4 +1,4 @@
-# Personal Project Management Tools
+# Personal Project Management Tool
 
 https://ppmtool-fullstack.herokuapp.com/
 
